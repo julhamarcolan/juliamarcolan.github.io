@@ -1,110 +1,359 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Meu primeiro site</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f6f8;
-            color: #333;
-        }
-
-        header {
-            background-color: #243b55;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        nav {
-            background-color: #141e30;
-            padding: 15px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        main {
-            max-width: 850px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-
-        section {
-            background-color: white;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
-
-        h2 {
-            color: #243b55;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #243b55;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Julia Marcolan Teixeira — Computational Physics, Magnetic Resonance, MRI and NMR, pulse sequence design.">
+  <title>Julia Marcolan — Computational Physics & Magnetic Resonance</title>
+  <style>
+    :root {
+      --paper: #f5f4f0;
+      --ink: #222225;
+      --muted: #66645f;
+      --line: #aaa8a1;
+      --accent: #d8e1dc;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    a { color: inherit; }
+    .topbar {
+      min-height: 62px;
+      padding: 0 4vw;
+      border-bottom: 1px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245,244,240,.96);
+      backdrop-filter: blur(8px);
+    }
+    .brand {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    nav { display: flex; gap: clamp(14px, 2.3vw, 32px); align-items: center; }
+    nav a {
+      font-size: 10px;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    nav a:hover, .text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+    main { padding: 0 4vw; }
+    .hero-title {
+      font-size: clamp(4.2rem, 17.1vw, 15.8rem);
+      line-height: .78;
+      letter-spacing: -.095em;
+      font-weight: 800;
+      margin: 5.1vw 0 4.6vw -.015em;
+      white-space: nowrap;
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(260px, .8fr);
+      gap: clamp(28px, 4.5vw, 64px);
+      align-items: start;
+      margin-bottom: 10vw;
+    }
+    .portrait {
+      width: 100%;
+      aspect-ratio: 1.12 / 1;
+      object-fit: cover;
+      display: block;
+      background: var(--accent);
+    }
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 1.12 / 1;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #e7e5de, #cdd6d1);
+      color: #4c504c;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .intro-copy { padding-top: 0; }
+    .eyebrow {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin: 0 0 22px;
+      color: var(--muted);
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3.2vw, 3.25rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+      margin: 0 0 24px;
+      font-weight: 750;
+    }
+    .discipline {
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      line-height: 1.35;
+      font-weight: 700;
+      letter-spacing: -.035em;
+      margin: 0 0 24px;
+    }
+    .bio {
+      color: #4d4b47;
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 43ch;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      font-size: 10px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .button.primary { background: var(--ink); color: var(--paper); }
+    .button:hover { background: var(--accent); color: var(--ink); }
+    .section {
+      border-top: 1px solid var(--ink);
+      padding: 30px 0 8vw;
+      scroll-margin-top: 80px;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 30px;
+      margin-bottom: 38px;
+    }
+    .section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+    }
+    .section h2 { max-width: 12ch; }
+    .section-intro { max-width: 54ch; font-size: 14px; line-height: 1.7; color: #4d4b47; margin: 0; }
+    .entry {
+      display: grid;
+      grid-template-columns: minmax(110px, .45fr) 1.6fr;
+      gap: 28px;
+      padding: 22px 0;
+      border-top: 1px solid #c9c7c0;
+    }
+    .entry-year { font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+    .entry h3 { margin: 0 0 8px; font-size: clamp(1.1rem, 1.8vw, 1.55rem); letter-spacing: -.04em; }
+    .entry p { margin: 0; color: #55534e; font-size: 13px; line-height: 1.65; max-width: 65ch; }
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+    .research-card { background: var(--paper); padding: clamp(22px, 3vw, 42px); min-height: 210px; }
+    .card-number { font-size: 10px; color: var(--muted); letter-spacing: .1em; }
+    .research-card h3 { font-size: clamp(1.25rem, 2.4vw, 2rem); line-height: 1; letter-spacing: -.055em; text-transform: uppercase; margin: 34px 0 14px; }
+    .research-card p { font-size: 13px; line-height: 1.65; color: #55534e; max-width: 45ch; }
+    .contact-band {
+      display: flex; justify-content: space-between; align-items: end; gap: 24px;
+      padding: 40px 0 52px; border-top: 1px solid var(--ink);
+    }
+    .contact-band h2 { margin-bottom: 10px; }
+    .contact-band p { font-size: 13px; color: var(--muted); margin: 0; }
+    footer {
+      border-top: 1px solid var(--ink);
+      padding: 18px 0 24px;
+      display: flex; justify-content: space-between; gap: 20px;
+      font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+    }
+    @media (max-width: 700px) {
+      .topbar { align-items: flex-start; padding: 18px 5vw; flex-direction: column; gap: 16px; }
+      nav { width: 100%; gap: 15px; flex-wrap: wrap; }
+      nav a { font-size: 9px; }
+      main { padding: 0 5vw; }
+      .hero-title { font-size: 17vw; margin: 12vw 0 8vw; }
+      .intro-grid, .section-head { grid-template-columns: 1fr; }
+      .intro-copy { padding-top: 8px; }
+      .section { padding-bottom: 18vw; }
+      .research-grid { grid-template-columns: 1fr; }
+      .entry { grid-template-columns: 1fr; gap: 10px; }
+      .contact-band { align-items: flex-start; flex-direction: column; }
+      footer { flex-direction: column; }
+    }
+  </style>
 </head>
-
 <body>
-
-    <header>
-        <h1>Meu primeiro site</h1>
-        <p>Bem-vindo à minha página!</p>
-    </header>
-
-    <nav>
-        <a href="#sobre">Sobre</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#contato">Contato</a>
+  <header class="topbar">
+    <a class="brand" href="#home">Julia Marcolan · Academic Portfolio</a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#formacao">Formação</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
     </nav>
+  </header>
 
-    <main>
+  <main>
+    <section id="home" aria-labelledby="main-title">
+      <h1 class="hero-title" id="main-title">JULIA</h1>
+      <div class="intro-grid">
+        <!-- Replace photo.jpg with your own image file. -->
+        <div class="photo-placeholder" id="photo-placeholder">
+          Add your portrait here<br>save it as <strong>photo.jpg</strong>
+        </div>
+        <div class="intro-copy">
+          <p class="eyebrow">Computational Physics · Magnetic Resonance</p>
+          <h2>Researching magnetic resonance through sequence design and imaging.</h2>
+          <p class="discipline">Computational Physics | Magnetic Resonance | MRI &amp; NMR | Pulse Sequence Design</p>
+          <p class="bio">
+            I am a PhD candidate in Computational Physics at the University of São Paulo (USP).
+            My research focuses on magnetic resonance, MRI and NMR methods, and the development
+            of pulse sequences for quantitative measurements and imaging.
+          </p>
+          <p class="bio">
+            This website brings together my academic background, research interests, publications,
+            and scientific projects.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="cv.pdf" download>Download CV ↗</a>
+            <a class="button" href="mailto:YOUR.EMAIL@EXAMPLE.COM">Get in touch ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="sobre">
-            <h2>Sobre mim</h2>
-            <p>
-                Olá! Este é meu primeiro site criado com HTML
-                e publicado usando o GitHub Pages.
-            </p>
-        </section>
+    <section class="section" id="formacao">
+      <div class="section-head">
+        <div>
+          <p class="section-label">01 / Academic background</p>
+          <h2>Formação</h2>
+        </div>
+        <p class="section-intro">My academic path in physics and computational methods. Replace or expand these entries with the details you want to publish.</p>
+      </div>
+      <div class="entry">
+        <div class="entry-year">2023 — Present</div>
+        <div>
+          <h3>PhD in Computational Physics</h3>
+          <p>University of São Paulo (USP), São Carlos, Brazil. Research in magnetic resonance, MRI/NMR methods, and pulse-sequence development.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-year">2021 — 2023</div>
+        <div>
+          <h3>Master’s in Computational Physics</h3>
+          <p>University of São Paulo (USP), São Carlos, Brazil. Research involving time-domain NMR and pulse-sequence programming.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-year">2015 — 2019</div>
+        <div>
+          <h3>Bachelor’s in Physics</h3>
+          <p>Fluminense Federal University (UFF), Brazil. Emphasis on Computational Physics.</p>
+        </div>
+      </div>
+    </section>
 
-        <section id="projetos">
-            <h2>Meus projetos</h2>
-            <p>
-                Aqui vou apresentar meus projetos, pesquisas
-                e trabalhos.
-            </p>
-        </section>
+    <section class="section" id="research">
+      <div class="section-head">
+        <div>
+          <p class="section-label">02 / Research</p>
+          <h2>Questions, methods &amp; ideas</h2>
+        </div>
+        <p class="section-intro">My work combines magnetic resonance physics, sequence programming, and image-based methods to develop and evaluate measurement techniques.</p>
+      </div>
+      <div class="research-grid">
+        <article class="research-card">
+          <span class="card-number">RESEARCH AREA 01</span>
+          <h3>MRI &amp; B₁ Mapping</h3>
+          <p>Methods for mapping radiofrequency field strength, comparing approaches, and understanding the effects of off-resonance and experimental conditions.</p>
+        </article>
+        <article class="research-card">
+          <span class="card-number">RESEARCH AREA 02</span>
+          <h3>NMR &amp; J-Spectroscopy</h3>
+          <p>Pulse-sequence development and quantitative analysis for J-coupled systems, including low-field NMR applications.</p>
+        </article>
+        <article class="research-card">
+          <span class="card-number">RESEARCH AREA 03</span>
+          <h3>Pulse Sequence Design</h3>
+          <p>Programming, testing, and optimizing pulse sequences for magnetic resonance experiments and imaging.</p>
+        </article>
+        <article class="research-card">
+          <span class="card-number">RESEARCH AREA 04</span>
+          <h3>Computational Methods</h3>
+          <p>Scientific programming, data processing, and visualization to support experimental physics and reproducible research.</p>
+        </article>
+      </div>
+    </section>
 
-        <section id="contato">
-            <h2>Contato</h2>
-            <p>
-                Entre em contato comigo para saber mais
-                sobre meus projetos.
-            </p>
-        </section>
+    <section class="section" id="publications">
+      <div class="section-head">
+        <div>
+          <p class="section-label">03 / Publications</p>
+          <h2>Selected work</h2>
+        </div>
+        <p class="section-intro">A selection of journal articles, conference abstracts, and presentations. Add confirmed citations and links here as you choose what to feature.</p>
+      </div>
+      <div class="entry">
+        <div class="entry-year">Conference abstract</div>
+        <div>
+          <h3>B₁ Mapping Methods</h3>
+          <p>Add the final title, co-authors, conference, year, and DOI or abstract link when available.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-year">Publication</div>
+        <div>
+          <h3>Research article</h3>
+          <p>Replace this placeholder with a published article, including a DOI or publisher link.</p>
+        </div>
+      </div>
+    </section>
 
-    </main>
+    <section class="contact-band" id="contact">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Let’s connect.</h2>
+        <p>For research collaborations, academic opportunities, or questions about my work.</p>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="mailto:YOUR.EMAIL@EXAMPLE.COM">Email me ↗</a>
+        <a class="button" href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+    </section>
 
     <footer>
-        <p>Meu primeiro site | 2026</p>
+      <span>Julia Marcolan · Academic Portfolio</span>
+      <span>Computational Physics &amp; Magnetic Resonance</span>
     </footer>
-
+  </main>
+  <script>
+    // If photo.jpg exists, show it in place of the photo placeholder.
+    const placeholder = document.getElementById('photo-placeholder');
+    const portrait = new Image();
+    portrait.src = 'photo.jpg';
+    portrait.alt = 'Portrait of Julia Marcolan';
+    portrait.className = 'portrait';
+    portrait.onload = () => placeholder.replaceWith(portrait);
+  </script>
 </body>
-
 </html>
